@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pythonapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pythonapi
+  template:
+    metadata:
+      labels:
+        app: pythonapi
+    spec:
+      containers:
+      - name: pythonapi
+        image: joelongtoe/fortuneapi
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pythonapi
+spec:
+  type: ClusterIP
+  selector:
+    app: pythonapi
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080

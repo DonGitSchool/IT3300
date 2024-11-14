@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-config
+data:
+  BOOK: "1984"
+  MOVIE: "Inception"
+  BAND: "Breathe Carolina"
+  ANIMAL: "Capybara"

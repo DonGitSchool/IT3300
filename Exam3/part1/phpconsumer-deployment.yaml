@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpconsumer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpconsumer
+  template:
+    metadata:
+      labels:
+        app: phpconsumer
+    spec:
+      containers:
+      - name: phpconsumer
+        image: joelongtoe/phpconsumer
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpconsumer
+spec:
+  type: LoadBalancer
+  selector:
+    app: phpconsumer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
